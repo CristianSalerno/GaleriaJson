@@ -1,6 +1,8 @@
 var url = "https://jsonplaceholder.typicode.com/photos";
 var galeriaFotos = document.querySelector('.container')
 var JsonImagenes = new XMLHttpRequest();
+var JsonData = new Array();
+
 JsonImagenes.open('GET', url, true);
 JsonImagenes.send();
 //Evento listener del Json
@@ -10,12 +12,8 @@ JsonImagenes.addEventListener('readystatechange', cargarJson);
 function cargarJson(event) {
     if (event.target.readyState == 4 && event.target.status == 200) {
         //console.log(event.target.response)
-        var JsonData = JSON.parse(event.target.response);
-        //displayFotos(JsonData);
-        //displayCategoria();
-        const filtrado = displayFilter(JsonData, 1)
-        console.log(filtrado)
-        displayFotos(filtrado);
+        JsonData = JSON.parse(event.target.response);
+
     }
 }
 
@@ -28,12 +26,12 @@ function displayCategoria(pJsonData, pAlbumId) {
             filtroCategoria.push(foto)
         }
     }
-    displayFotos(filtroCategoria);
+    return filtroCategoria;
 }
 
 
 
-//Display por categoria con filter para machos alfa 
+//Display por categoria con filter 
 function displayFilter(pJsonData, pAlbumId) {
     return pJsonData.filter(elemento => {
         return elemento.albumId === pAlbumId
@@ -52,5 +50,5 @@ function displayFotos(pJsonData) {
         </div>`
 
     }
-    galeriaFotos.innerHTML += galeria;
+    galeriaFotos.innerHTML = galeria;
 }
