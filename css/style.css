@@ -14,12 +14,11 @@ header {
     display: flex;
     flex-direction: row;
     padding: 10px;
+    width: 50%;
+
 }
 
-header nav {
-    width: 50%;
-    height: 50%;
-}
+
 
 
 header .navegacion ul li a {
